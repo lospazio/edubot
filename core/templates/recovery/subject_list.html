@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-4">
+    <h2 class="mb-4">Seleziona la materia</h2>
+
+    <div class="row">
+        {% for subject in subjects %}
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ subject.name|capfirst }}</h5>
+                        {% if exercise_type == 'recupero' %}
+                            <a href="{% url 'exercise_recupero_list' subject.name %}" class="btn btn-primary mt-2">Vai</a>
+                        {% else %}
+                            <a href="{% url 'exercise_potenziamento_list' subject.name %}" class="btn btn-primary mt-2">Vai</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p class="text-muted">Nessuna materia disponibile.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

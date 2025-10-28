@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block title %}Carica Appunto{% endblock %}
+
+{% block content %}
+<div class="container">
+
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'note_list' %}">Appunti</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Carica Appunto</li>
+        </ol>
+    </nav>
+
+    <!-- Header -->
+    <div class="mb-3">
+        <h1>Carica Nuovo Appunto</h1>
+    </div>
+
+    <!-- Form per caricare appunto -->
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="id_title" class="form-label">Titolo</label>
+            {{ form.title|add_class:"form-control" }}
+        </div>
+        <div class="mb-3">
+            <label for="id_file" class="form-label">File</label>
+            {{ form.file|add_class:"form-control" }}
+        </div>
+        <div class="mb-3">
+            <label for="id_description" class="form-label">Descrizione</label>
+            {{ form.description|add_class:"form-control" }}
+        </div>
+        <button type="submit" class="btn btn-success">Carica Appunto</button>
+        <a href="{% url 'note_list' %}" class="btn btn-secondary">Annulla</a>
+    </form>
+
+</div>
+{% endblock %}
+
+{% block head_extra %}
+<style>
+.container {
+    margin-top: 25px;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+.form-control {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 15px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 15px;
+    text-decoration: none;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+</style>
+{% endblock %}

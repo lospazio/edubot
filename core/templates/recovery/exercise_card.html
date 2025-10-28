@@ -1,0 +1,19 @@
+<div class="card mb-3">
+    <div class="card-body">
+        <h5 class="card-title">{{ exercise.title }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">
+            {{ exercise.get_subject_display }} - {{ exercise.topic }}
+            {% if exercise.type == 'recupero' %}
+                (Recupero)
+            {% else %}
+                (Potenziamento)
+            {% endif %}
+        </h6>
+        <p class="card-text">{{ exercise.content|truncatechars:150 }}</p>
+        {% if exercise.type == 'recupero' %}
+            <a href="{% url 'exercise_recupero_detail' exercise.pk %}" class="btn btn-primary">Apri</a>
+        {% else %}
+            <a href="{% url 'exercise_potenziamento_detail' exercise.pk %}" class="btn btn-primary">Apri</a>
+        {% endif %}
+    </div>
+</div>

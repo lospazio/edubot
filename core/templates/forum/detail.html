@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %}{{ discussion.title }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'forum_list' %}">Discussioni</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ discussion.title }}</li>
+        </ol>
+    </nav>
+
+    <!-- Titolo discussione -->
+    <div class="mb-3">
+        <h1>{{ discussion.topic }}</h1>
+        <p class="text-muted">Autore: {{ discussion.author.username }} | Creata il {{ discussion.created_at|date:"d/m/Y H:i" }}</p>
+        <p>{{ discussion.description }}</p>
+    </div>
+
+    <!-- Sezione Commenti -->
+    <div class="mb-4">
+        <h3>Commenti</h3>
+        {% if comments %}
+            <ul class="list-group">
+                {% for comment in comments %}
+                <li class="list-group-item">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <div class="d-flex align-items-center">
+                            {% if comment.author.profile.avatar %}
+                                <img src="{{ comment.author.profile.avatar.url }}" alt="Avatar" class="avatar me-2">
+                            {% endif %}
+                            <strong>{{ comment.author.username }}</strong>
+                        </div>
+                        <span class="text-muted">{{ comment.created_at|date:"d/m/Y H:i" }}</span>
+                    </div>
+                    <p>{{ comment.content }}</p>
+                    {% if comment.updated_at %}
+                        <small class="text-muted">Modificato il {{ comment.updated_at|date:"d/m/Y H:i" }}</small>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="text-muted">Nessun commento ancora.</p>
+        {% endif %}
+    </div>
+
+    <!-- Form Aggiungi Commento -->
+    <div class="mb-5">
+        <h4>Aggiungi un commento</h4>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Invia</button>
+        </form>
+    </div>
+
+    <a href="{% url 'forum_list' %}" class="btn btn-secondary">Torna alle Discussioni</a>
+</div>
+{% endblock %}
+
+{% block head_extra %}
+<style>
+.container {
+    max-width: 800px;
+}
+.avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+.list-group-item {
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+}
+.btn-primary:hover {
+    background-color: #0069d9;
+}
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+}
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+</style>
+{% endblock %}

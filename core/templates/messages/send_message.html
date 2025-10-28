@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Invia Messaggio{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'inbox' %}">Posta in Arrivo</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Invia Messaggio</li>
+        </ol>
+    </nav>
+
+    <!-- Titolo -->
+    <h1>Invia Messaggio</h1>
+    <p>Compila il modulo per inviare un messaggio privato a un tuo compagno.</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="id_recipient" class="form-label">Destinatario</label>
+            {{ form.recipient }}
+        </div>
+        <div class="mb-3">
+            <label for="id_subject" class="form-label">Oggetto</label>
+            {{ form.subject }}
+        </div>
+        <div class="mb-3">
+            <label for="id_body" class="form-label">Messaggio</label>
+            {{ form.body }}
+        </div>
+        <button type="submit" class="btn btn-success">Invia</button>
+    </form>
+
+</div>
+{% endblock %}
+
+{% block head_extra %}
+<style>
+.container {
+    max-width: 700px;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+textarea, input, select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 1rem;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+</style>
+{% endblock %}

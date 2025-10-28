@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h1>Benvenuto nella Dashboard</h1>
+
+<div class="dashboard-grid">
+    <!-- Card Appunti -->
+    <div class="card">
+        <h2>Appunti</h2>
+        <p>Guarda e carica i tuoi appunti.</p>
+        <a href="{% url 'note_list' %}" class="btn">Vai agli Appunti</a>
+    </div>
+
+    <!-- Card Esercizi -->
+    <div class="card">
+        <h2>Esercizi</h2>
+        <p>Allenati con gli esercizi disponibili.</p>
+        <a href="{% url 'exercises_home' %}" class="btn">Vai agli Esercizi</a>
+    </div>
+
+    <!-- Card Forum -->
+    <div class="card">
+        <h2>Discussioni</h2>
+        <p>Partecipa alle discussioni con altri utenti.</p>
+        <a href="{% url 'forum_list' %}" class="btn">Vai al Forum</a>
+    </div>
+
+    <!-- Card AI Tutor -->
+    <div class="card">
+        <h2>AI Tutor</h2>
+        <p>Chiedi aiuto al tuo assistente AI.</p>
+        <a href="{% url 'chat' %}" class="btn">Apri AI Tutor</a>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+.card {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    text-align: center;
+}
+.card h2 {
+    margin-bottom: 0.5rem;
+}
+.card p {
+    margin-bottom: 1rem;
+}
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: #0d6efd;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+}
+.btn:hover {
+    background: #0b5ed7;
+}
+</style>
+{% endblock %}

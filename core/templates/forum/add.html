@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Aggiungi Discussione{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'forum_list' %}">Discussioni</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Aggiungi Discussione</li>
+        </ol>
+    </nav>
+
+    <!-- Titolo -->
+    <h1>Aggiungi Nuova Discussione</h1>
+    <p>Compila il form qui sotto per creare una nuova discussione.</p>
+
+    <!-- Form Discussione -->
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Crea Discussione</button>
+        <a href="{% url 'forum_list' %}" class="btn btn-secondary">Annulla</a>
+    </form>
+
+</div>
+{% endblock %}
+
+{% block head_extra %}
+<style>
+.container {
+    max-width: 700px;
+}
+.btn-success {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    text-decoration: none;
+}
+.btn-success:hover {
+    background-color: #218838;
+}
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    text-decoration: none;
+}
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+</style>
+{% endblock %}

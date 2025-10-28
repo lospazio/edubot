@@ -1,0 +1,246 @@
+/* =========================
+   Reset e base globale
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    background-color: #f4f6f8;
+    color: #333;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+/* =========================
+   Navbar & Breadcrumbs
+========================= */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.navbar a {
+    margin-right: 15px;
+    font-weight: bold;
+}
+
+.breadcrumb {
+    padding: 10px 0;
+    list-style: none;
+    display: flex;
+    font-size: 0.9rem;
+}
+
+.breadcrumb li + li:before {
+    content: "/";
+    padding: 0 5px;
+    color: #666;
+}
+
+/* =========================
+   Headers
+========================= */
+h1, h2, h3, h4, h5 {
+    margin-bottom: 15px;
+    color: #222;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+h2 {
+    font-size: 1.75rem;
+}
+
+/* =========================
+   Cards e Box
+========================= */
+.card {
+    background-color: #fff;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.card-header {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.card-body {
+    font-size: 1rem;
+}
+
+/* =========================
+   Tables
+========================= */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 10px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f1f3f6;
+}
+
+/* =========================
+   Forms
+========================= */
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form textarea,
+form select {
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+form button, .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form button:hover, .btn:hover {
+    background-color: #0056b3;
+}
+
+/* =========================
+   Buttons alternativi
+========================= */
+.btn-secondary {
+    background-color: #6c757d;
+}
+
+.btn-secondary:hover {
+    background-color: #545b62;
+}
+
+.btn-success {
+    background-color: #28a745;
+}
+
+.btn-success:hover {
+    background-color: #1e7e34;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+}
+
+.btn-danger:hover {
+    background-color: #b02a37;
+}
+
+/* =========================
+   Lists
+========================= */
+ul, ol {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+/* =========================
+   Chat AI
+========================= */
+.chat-box {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    max-height: 400px;
+    overflow-y: auto;
+    background-color: #f9f9f9;
+}
+
+.chat-message {
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.chat-message.user {
+    justify-content: flex-end;
+}
+
+.chat-message.ai {
+    justify-content: flex-start;
+}
+
+.message-content {
+    padding: 10px 15px;
+    border-radius: 20px;
+    max-width: 70%;
+}
+
+.chat-message.user .message-content {
+    background-color: #007bff;
+    color: white;
+}
+
+.chat-message.ai .message-content {
+    background-color: #e2e3e5;
+    color: black;
+}
+
+/* =========================
+   Responsività
+========================= */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+    }
+
+    .chat-message .message-content {
+        max-width: 85%;
+    }
+
+    table th, table td {
+        padding: 8px 10px;
+    }
+}

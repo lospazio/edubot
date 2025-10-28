@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Chat AI{% endblock %}
+
+{% block content %}
+<div class="container">
+
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mt-3">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Chat AI</li>
+        </ol>
+    </nav>
+
+</div>
+{% endblock %}
+
+
+    <!-- Header -->
+    <div class="mb-3">
+        <h1>Chat con l'AI Tutor</h1>
+        <p>Fai domande, chiedi spiegazioni o suggerimenti sugli esercizi.</p>
+    </div>
+
+    <!-- Chat container -->
+    <div id="chat-box" class="chat-box mb-3">
+        {% for message in messages %}
+            {% if message.role == "user" %}
+                <div class="chat-message user">
+                    <div class="message-content">{{ message.content }}</div>
+                </div>
+            {% else %}
+                <div class="chat-message ai">
+                    <div class="message-content">{{ message.content }}</div>
+                </div>
+            {% endif %}
+        {% empty %}
+            <div class="chat-message ai">
+                <div class="message-content">Ciao! Sono il tuo AI Tutor. Come posso aiutarti oggi?</div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Chat input form -->
+        <form id="chat-form">
+            <input type="text" id="chat-input" placeholder="Scrivi un messaggio..." required>
+            <button type="submit">Invia</button>
+        </form>
+
+<script>
+const form = document.getElementById("chat-form");
+const input = document.getElementById("chat-input");
+const chatBox = document.getElementById("chat-box");
+
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const message = input.value;
+    input.value = "";
+
+    // Mostra il messaggio dell'utente subito
+    const userDiv = document.createElement("div");
+    userDiv.className = "chat-message user";
+    userDiv.innerText = message;
+    chatBox.appendChild(userDiv);
+
+    const response = await fetch("{% url 'chat' %}", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "X-CSRFToken": "{{ csrf_token }}"
+        },
+        body: `message=${encodeURIComponent(message)}`
+    });
+
+    const data = await response.json();
+
+    const aiDiv = document.createElement("div");
+    aiDiv.className = "chat-message ai";
+    aiDiv.innerText = data.message;
+    chatBox.appendChild(aiDiv);
+
+    chatBox.scrollTop = chatBox.scrollHeight;
+});
+</script>

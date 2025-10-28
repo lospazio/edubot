@@ -1,0 +1,86 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Lo Spazio{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Navbar -->
+    <header>
+        <nav class="navbar">
+            <a class="nav-brand" href="{% url 'dashboard' %}">1 R</a>
+            <ul class="nav-links">
+                <li><a href="{% url 'note_list' %}">Appunti</a></li>
+                <li><a href="{% url 'exercises_home' %}">Esercizi</a></li>
+                <li><a href="{% url 'forum_list' %}">Forum</a></li>
+                <li><a href="{% url 'ai_tutor' %}">AI Tutor</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'admin:logout' %}">Logout</a></li>
+                {% else %}
+                <li><a href="{% url 'admin:login' %}">Login</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main content -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Abdul - Tutti i diritti riservati</p>
+    </footer>
+
+    <script src="{% static 'js/scripts.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
+
+<style>
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: #0d6efd;
+    color: #fff;
+}
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 1rem;
+}
+.nav-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+}
+.nav-links li {
+    display: inline;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1rem;
+    background: #f1f1f1;
+    margin-top: 2rem;
+}
+
+/* Main */
+main {
+    padding: 2rem;
+}
+</style>

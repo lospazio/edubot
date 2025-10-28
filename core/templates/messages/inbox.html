@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Posta in Arrivo{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Posta in Arrivo</li>
+        </ol>
+    </nav>
+
+    <!-- Titolo -->
+    <h1>Posta in Arrivo</h1>
+    <p>Qui puoi leggere i messaggi che ti hanno inviato i tuoi compagni.</p>
+
+    {% if messages %}
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>Da</th>
+                    <th>Oggetto</th>
+                    <th>Data</th>
+                    <th>Stato</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for message in messages %}
+                <tr class="{% if not message.read %}table-warning{% endif %}">
+                    <td>{{ message.sender.username }}</td>
+                    <td>{{ message.subject }}</td>
+                    <td>{{ message.created_at|date:"d/m/Y H:i" }}</td>
+                    <td>{% if message.read %}Letto{% else %}Non Letto{% endif %}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="mt-3">Nessun messaggio presente.</p>
+    {% endif %}
+
+</div>
+{% endblock %}
+
+{% block head_extra %}
+<style>
+.container {
+    max-width: 900px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+
+.table-warning {
+    background-color: #fff3cd;
+}
+</style>
+{% endblock %}

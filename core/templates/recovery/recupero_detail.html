@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ topic }} - Recupero{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">{{ topic }}</h1>
+
+    <!-- Spiegazione -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+            <h4 class="card-title">Spiegazione</h4>
+            <p class="card-text">{{ explanation|linebreaks }}</p>
+        </div>
+    </div>
+
+    <!-- Lista esercizi -->
+    {% if exercises %}
+        {% for exercise in exercises %}
+            <div class="card mb-3 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ exercise.title }}</h5>
+                    {% if exercise.subtitle %}
+                        <h6 class="card-subtitle mb-2 text-muted">{{ exercise.subtitle }}</h6>
+                    {% endif %}
+
+                    <!-- Domanda e risposta -->
+                    {% if exercise.question %}
+                        <p><strong>Domanda:</strong> {{ exercise.question }}</p>
+                        <p><strong>Risposta:</strong> {{ exercise.answer }}</p>
+                    {% endif %}
+
+                    <p class="card-text">{{ exercise.content|linebreaks }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p class="text-muted">Non ci sono esercizi disponibili per questo argomento.</p>
+    {% endif %}
+
+    <div class="mt-4">
+        <a href="{% url 'recupero_list' %}" class="btn btn-secondary">Torna alla lista materie</a>
+    </div>
+</div>
+{% endblock %}
